@@ -45,6 +45,11 @@ import java.io.FileInputStream;
 import java.nio.channels.FileChannel;
 
 public class Helpers {
+    //String urlgooglelus = "https://plus.google.com/u/0/+Spleint";
+    static String urlcommunity = "kidda@spleint.com";
+    static String urltwitter = "https://twitter.com/spleint_inc";
+    static String urlgithub = "https://github.com/SEzekiel/kidda";
+    static String urlsource = "https://github.com/SEzekiel/kidda/issues";
 
     public static void showAbout(AppCompatActivity activity) {
         FragmentManager fm = activity.getSupportFragmentManager();
@@ -64,13 +69,6 @@ public class Helpers {
     }
 
     public static class AboutDialog extends DialogFragment {
-
-        //String urlgooglelus = "https://plus.google.com/u/0/+NamanDwivedi14";
-        String urlcommunity = "kidda@spleint.com";
-        String urltwitter = "https://twitter.com/spleint_inc";
-        String urlgithub = "https://github.com/SEzekiel/kidda";
-        String urlsource = "https://github.com/SEzekiel/kidda/issues";
-
         public AboutDialog() {
         }
 
@@ -140,7 +138,7 @@ public class Helpers {
                 @Override
                 public void onClick(View v) {
                     dismiss();
-                    showReportSelectionDialog().show();
+                    new Selection().show(getFragmentManager(),getTag());
                 }
             });
             try {
@@ -156,11 +154,18 @@ public class Helpers {
                     .setView(aboutBodyView)
                     .create();
         }
+    }
 
+    public static class Selection extends DialogFragment{
+
+        public Selection() {
+
+        }
         public void sendReport(int reportID){
             try {
+                String emailAddresses[] = {urlcommunity};
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, urlcommunity);
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, emailAddresses);
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, reportID==1?"Kidda - Feature Request":"Kidda - Bug Report");
                 emailIntent.setType("plain/text");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello Kidda Team,\n\n");
@@ -171,7 +176,8 @@ public class Helpers {
             }
         }
 
-        public Dialog showReportSelectionDialog(){
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
             LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
             LinearLayout optionDialog = (LinearLayout) layoutInflater.inflate(R.layout.layout_feature_bug_dialog, null);

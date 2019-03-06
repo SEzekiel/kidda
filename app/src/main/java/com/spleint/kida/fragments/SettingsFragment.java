@@ -54,7 +54,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private static final String KEY_START_PAGE = "start_page_preference";
     private boolean lastFMlogedin;
 
-    private Preference nowPlayingSelector,  lastFMlogin, lockscreen, xposed;
+    private Preference nowPlayingSelector,  lastFMlogin, lockscreen; //xposed;
 
     private SwitchPreference toggleAnimations;
     private ListPreference themePreference, startPagePreference;
@@ -72,7 +72,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         lockscreen = findPreference(LOCKSCREEN);
         nowPlayingSelector = findPreference(NOW_PLAYING_SELECTOR);
 
-        xposed = findPreference(XPOSED);
+        //xposed = findPreference(XPOSED);
 
         lastFMlogin = findPreference(LASTFM_LOGIN);
         updateLastFM();
@@ -143,15 +143,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             }
         });
 
-        xposed.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Bundle extras = new Bundle();
-                extras.putBoolean("xtrack",(boolean)newValue);
-                mPreferences.updateService(extras);
-                return true;
-            }
-        });
+//        xposed.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                Bundle extras = new Bundle();
+//                extras.putBoolean("xtrack",(boolean)newValue);
+//                mPreferences.updateService(extras);
+//                return true;
+//            }
+//        });
 
         lastFMlogin.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override

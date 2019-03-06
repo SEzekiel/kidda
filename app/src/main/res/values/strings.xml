@@ -36,8 +36,8 @@
     <string name="playlist_recently_played">Recently Played</string>
     <string name="playlist_top_tracks">My Top Tracks</string>
 
-    <string name="timber_source">Report any bugs <u> here </u> </string>
-    <string name="timber_feature_request">Noticed a bug? Want a feature to be added? Specify them <u> here </u></string>
+    <string name="timber_source">Report github issues <u> here </u> </string>
+    <string name="timber_feature_request">Noticed a bug? Want a feature to be added? Share them <u> here </u></string>
 
     <string name="menu_show_as">View As</string>
     <string name="menu_show_as_entry_list">List</string>
@@ -49,9 +49,9 @@
     <string name="black">Black</string>
 
     <string name="last_opened">Last Opened</string>
-    <!--<string name="play_billing_license_key">1234</string>-->
-    <!--<string name="cast_app_id">12345</string>-->
-    <!--<string name="fabric_api_key">fbdf3e3928e76623581e48417126a4c6f7a6b187</string>-->
+    <string name="play_billing_license_key">1234</string>
+    <string name="cast_app_id">12345</string>
+    <string name="fabric_api_key">fbdf3e3928e76623581e48417126a4c6f7a6b187</string>
 
     <string name="songs">Songs</string>
     <string name="albums">Albums</string>

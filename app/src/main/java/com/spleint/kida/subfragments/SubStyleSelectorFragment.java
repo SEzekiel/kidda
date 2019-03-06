@@ -131,24 +131,35 @@ public class SubStyleSelectorFragment extends Fragment {
         }
     }
     private void showPurchaseDialog() {
+//        MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+//                .title("Purchase")
+//                .content("This now playing style is available after a one time purchase of any amount. Support development and unlock this style?")
+//                .positiveText("Support development")
+//                .neutralText("Restore purchases")
+//                .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                    @Override
+//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                        startActivity(new Intent(getActivity(), DonateActivity.class));
+//                        dialog.dismiss();
+//                    }
+//                }).onNeutral(new MaterialDialog.SingleButtonCallback() {
+//                    @Override
+//                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                        Intent intent = new Intent(getActivity(), DonateActivity.class);
+//                        intent.putExtra("title", "Restoring purchases..");
+//                        intent.setAction("restore");
+//                        startActivity(intent);
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .show();
         MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title("Purchase")
-                .content("This now playing style is available after a one time purchase of any amount. Support development and unlock this style?")
-                .positiveText("Support development")
-                .neutralText("Restore purchases")
+                .title("Donate")
+                .content("Donation is not available at the moment (and may never be available). But please check back later")
+                .positiveText("Dismiss")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        startActivity(new Intent(getActivity(), DonateActivity.class));
-                        dialog.dismiss();
-                    }
-                }).onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Intent intent = new Intent(getActivity(), DonateActivity.class);
-                        intent.putExtra("title", "Restoring purchases..");
-                        intent.setAction("restore");
-                        startActivity(intent);
                         dialog.dismiss();
                     }
                 })

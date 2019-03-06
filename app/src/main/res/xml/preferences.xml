@@ -119,16 +119,16 @@
             app:ateKey_pref_checkBox="?ate_key" />
     </com.spleint.kida.widgets.ThemedPreferenceCategory>
 
-    <com.spleint.kida.widgets.ThemedPreferenceCategory android:title="@string/advanced">
+    <!--<com.spleint.kida.widgets.ThemedPreferenceCategory android:title="@string/advanced">-->
 
-        <com.afollestad.appthemeengine.prefs.ATECheckBoxPreference
-            android:defaultValue="false"
-            android:key="toggle_xposed_trackselector"
-            android:summary="@string/summary_xposed_trackselector"
-            android:title="@string/xposed_trackselector"
-            app:ateKey_pref_checkBox="?ate_key" />
+        <!--<com.afollestad.appthemeengine.prefs.ATECheckBoxPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="toggle_xposed_trackselector"-->
+            <!--android:summary="@string/summary_xposed_trackselector"-->
+            <!--android:title="@string/xposed_trackselector"-->
+            <!--app:ateKey_pref_checkBox="?ate_key" />-->
 
-    </com.spleint.kida.widgets.ThemedPreferenceCategory>
+    <!--</com.spleint.kida.widgets.ThemedPreferenceCategory>-->
 
     <!--<com.spleint.kida.widgets.ThemedPreferenceCategory android:title="Support">-->
 
