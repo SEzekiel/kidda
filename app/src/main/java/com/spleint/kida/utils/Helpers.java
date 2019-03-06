@@ -22,19 +22,27 @@ import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spleint.kida.R;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.channels.FileChannel;
 
 public class Helpers {
 
@@ -57,8 +65,8 @@ public class Helpers {
 
     public static class AboutDialog extends DialogFragment {
 
-        String urlgooglelus = "https://plus.google.com/u/0/+NamanDwivedi14";
-        String urlcommunity = "https://plus.google.com/communities/111029425713454201429";
+        //String urlgooglelus = "https://plus.google.com/u/0/+NamanDwivedi14";
+        String urlcommunity = "kidda@spleint.com";
         String urltwitter = "https://twitter.com/spleint_inc";
         String urlgithub = "https://github.com/SEzekiel/kidda";
         String urlsource = "https://github.com/SEzekiel/kidda/issues";
@@ -81,7 +89,7 @@ public class Helpers {
             TextView source = (TextView) aboutBodyView.findViewById(R.id.source);
             TextView community = (TextView) aboutBodyView.findViewById(R.id.feature_request);
 
-            TextView dismiss = (TextView) aboutBodyView.findViewById(R.id.dismiss_dialog);
+            final TextView dismiss = (TextView) aboutBodyView.findViewById(R.id.dismiss_dialog);
             dismiss.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,15 +101,15 @@ public class Helpers {
             github.setPaintFlags(github.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
             googleplus.setVisibility(View.GONE);
-            googleplus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(urlgooglelus));
-                    startActivity(i);
-                }
-
-            });
+//            googleplus.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = new Intent(Intent.ACTION_VIEW);
+//                    i.setData(Uri.parse(urlgooglelus));
+//                    startActivity(i);
+//                }
+//
+//            });
             twitter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -131,9 +139,8 @@ public class Helpers {
             community.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(urlcommunity));
-                    startActivity(i);
+                    dismiss();
+                    showReportSelectionDialog().show();
                 }
             });
             try {
@@ -150,6 +157,47 @@ public class Helpers {
                     .create();
         }
 
-    }
+        public void sendReport(int reportID){
+            try {
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, urlcommunity);
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, reportID==1?"Kidda - Feature Request":"Kidda - Bug Report");
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello Kidda Team,\n\n");
 
+                startActivity(emailIntent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public Dialog showReportSelectionDialog(){
+            LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout optionDialog = (LinearLayout) layoutInflater.inflate(R.layout.layout_feature_bug_dialog, null);
+
+            LinearLayout featureRequest = optionDialog.findViewById(R.id.feature_request);
+            LinearLayout bugReport = optionDialog.findViewById(R.id.bug_report);
+
+            featureRequest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    sendReport(1);
+                }
+            });
+
+            bugReport.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    sendReport(2);
+                }
+            });
+
+            return new AlertDialog.Builder(getActivity())
+                    .setView(optionDialog)
+                    .create();
+        }
+    }
 }
