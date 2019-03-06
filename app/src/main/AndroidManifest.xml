@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.spleint.kida">
+
+    <uses-sdk tools:overrideLibrary="de.Maxr1998.trackselectorlib" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+
+    <application
+        android:name="com.spleint.kida.TimberApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Kidda${appNameSuffix}"
+        android:theme="@style/AppTheme.FullScreen.Light"
+        tools:replace="android:allowBackup, android:label">
+
+        <activity
+            android:name="com.spleint.kida.activities.MainActivity"
+            android:label="Kidda${appNameSuffix}"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+            <intent-filter android:priority="-1">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.spleint.kida.activities.SettingsActivity"
+            android:theme="@style/AppThemeNormalLight" />
+
+        <activity
+            android:name="com.spleint.kida.activities.PlaylistDetailActivity"
+            android:theme="@style/AppTheme.FullScreen.Light" />
+
+        <activity
+            android:name="com.spleint.kida.activities.SearchActivity"
+            android:theme="@style/AppThemeNormalLight" />
+
+        <activity
+            android:name="com.spleint.kida.activities.NowPlayingActivity"
+            android:theme="@style/AppTheme.FullScreen.Light" />
+
+        <activity android:name="com.spleint.kida.activities.DonateActivity"/>
+
+        <activity
+            android:name="com.spleint.kida.cast.ExpandedControlsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.ExpandedCastController"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <receiver android:name="com.spleint.kida.helpers.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+        </receiver>
+        <!-- Music service -->
+        <service
+            android:name="com.spleint.kida.MusicService"
+            android:label="@string/app_name"
+            android:process=":main" />
+
+        <service
+            android:name="com.spleint.kida.WearBrowserService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
+        <!--use your own api key for fabric-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fbdf3e3928e76623581e48417126a4c6f7a6b187" />
+
+        <meta-data
+            android:name=
+                "com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="com.spleint.kida.cast.CastOptionsProvider" />
+
+        <receiver android:name="com.spleint.kida.widgets.desktop.StandardWidget" android:label="@string/widget_standard">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.spleint.kida.metachanged" />
+                <action android:name="com.spleint.kida.playstatechanged" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_standard" />
+        </receiver>
+
+        <receiver android:name="com.spleint.kida.widgets.desktop.WhiteWidget" android:label="@string/widget_white">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.spleint.kida.metachanged" />
+                <action android:name="com.spleint.kida.playstatechanged" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_white" />
+        </receiver>
+
+        <receiver android:name="com.spleint.kida.widgets.desktop.SmallWidget" android:label="@string/widget_small">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.spleint.kida.metachanged" />
+                <action android:name="com.spleint.kida.playstatechanged" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_small" />
+        </receiver>
+
+    </application>
+
+</manifest>
