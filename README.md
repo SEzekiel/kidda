@@ -3,7 +3,7 @@
 
 Material Design Music Player
 
-<a href='https://play.google.com/store/apps/details?id=com.spleint.kida'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height=90px/></a>
+<a href='https://play.google.com/store/apps/details?id=spleint.kida'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height=90px/></a>
 
 ## Features
 - Material design
@@ -16,9 +16,11 @@ Material Design Music Player
 - Gestures for track switching
 - LastFM scrobble
 - Android Wear and Android Auto support
-- Playing queue in notification (Xposed)
 - Lyrics support
 - Chromecast support
+
+## To Do
+- Playing queue in notification (Xposed)
 
 ## Credits
 
