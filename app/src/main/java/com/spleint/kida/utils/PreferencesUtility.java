@@ -47,6 +47,7 @@ public final class PreferencesUtility {
     private static final String TOGGLE_HEADPHONE_PAUSE = "toggle_headphone_pause";
     private static final String THEME_PREFERNCE = "theme_preference";
     private static final String START_PAGE_INDEX = "start_page_index";
+    private static final String TIME_TO_SLEEP = "time_to_sleep";
     private static final String START_PAGE_PREFERENCE_LASTOPENED = "start_page_preference_latopened";
     private static final String NOW_PLAYNG_THEME_VALUE = "now_playing_theme_value";
     private static final String TOGGLE_XPOSED_TRACKSELECTOR = "toggle_xposed_trackselector";
@@ -118,6 +119,12 @@ public final class PreferencesUtility {
     public void setStartPageIndex(final int index) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(START_PAGE_INDEX, index);
+        editor.apply();
+    }
+
+    public void setSleepTimerValue(final int index) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(TIME_TO_SLEEP, index);
         editor.apply();
     }
 

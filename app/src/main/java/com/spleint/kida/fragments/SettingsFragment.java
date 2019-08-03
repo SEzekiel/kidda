@@ -30,6 +30,7 @@ import com.afollestad.appthemeengine.prefs.ATECheckBoxPreference;
 import com.afollestad.appthemeengine.prefs.ATEColorPreference;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.spleint.kida.R;
+import com.spleint.kida.TimberApp;
 import com.spleint.kida.activities.DonateActivity;
 import com.spleint.kida.activities.SettingsActivity;
 import com.spleint.kida.dialogs.LastFmLoginDialog;
@@ -37,6 +38,8 @@ import com.spleint.kida.lastfmapi.LastFmClient;
 import com.spleint.kida.utils.Constants;
 import com.spleint.kida.utils.NavigationUtils;
 import com.spleint.kida.utils.PreferencesUtility;
+
+import java.util.List;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -52,12 +55,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
     private static final String TOGGLE_SYSTEM_ANIMATIONS = "toggle_system_animations";
     private static final String KEY_START_PAGE = "start_page_preference";
+    private static final String SLEEP_TIMER = "sleep_timer_time";
     private boolean lastFMlogedin;
 
     private Preference nowPlayingSelector,  lastFMlogin, lockscreen; //xposed;
 
     private SwitchPreference toggleAnimations;
-    private ListPreference themePreference, startPagePreference;
+    private ListPreference themePreference, startPagePreference, sleepTimer;
     private PreferencesUtility mPreferences;
     private String mAteKey;
 
@@ -78,6 +82,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         updateLastFM();
 //        themePreference = (ListPreference) findPreference(KEY_THEME);
         startPagePreference = (ListPreference) findPreference(KEY_START_PAGE);
+        sleepTimer = (ListPreference) findPreference(SLEEP_TIMER);
 
         nowPlayingSelector.setIntent(NavigationUtils.getNavigateToStyleSelectorIntent(getActivity(), Constants.SETTINGS_STYLE_SELECTOR_NOWPLAYING));
 
@@ -120,6 +125,35 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                     case "artists":
                         mPreferences.setLastOpenedAsStartPagePreference(false);
                         mPreferences.setStartPageIndex(2);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        sleepTimer.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                switch ((String) newValue){
+                    case "never":
+                        mPreferences.setSleepTimerValue(0);
+                        TimberApp.getInstance().cancelTimer();
+                        break;
+                    case "_10_mins":
+                        mPreferences.setSleepTimerValue(10);
+                        TimberApp.getInstance().startTimer(1);
+                        break;
+                    case "_25_mins":
+                        mPreferences.setSleepTimerValue(2);
+                        TimberApp.getInstance().startTimer(25);
+                        break;
+                    case "_45_mins":
+                        mPreferences.setSleepTimerValue(3);
+                        TimberApp.getInstance().startTimer(45);
+                        break;
+                    case "_60_mins":
+                        mPreferences.setSleepTimerValue(4);
+                        TimberApp.getInstance().startTimer(60);
                         break;
                 }
                 return true;

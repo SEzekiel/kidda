@@ -14,7 +14,11 @@
 
 package com.spleint.kida;
 
+import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.afollestad.appthemeengine.ATE;
 import com.crashlytics.android.Crashlytics;
@@ -33,8 +37,10 @@ import io.fabric.sdk.android.Fabric;
 
 public class TimberApp extends MultiDexApplication {
 
-
+    private static final String TAG = "TimberApp";
     private static TimberApp mInstance;
+    public static final String COUNTDOWN_BR = "com.spleint.kida.SLEEP_TIMER";
+    CountDownTimer cdt;
 
     public static synchronized TimberApp getInstance() {
         return mInstance;
@@ -109,5 +115,30 @@ public class TimberApp extends MultiDexApplication {
 
     }
 
+    public void startTimer(int minutes) {
+        int millisFutures = minutes * 60 * 1000; //minutes to seconds
+        final Intent bi = new Intent(COUNTDOWN_BR);
+        cdt = new CountDownTimer(millisFutures, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.d(TAG, "Countdown seconds remaining: " + millisUntilFinished / 1000);
+            }
 
+            @Override
+            public void onFinish() {
+                Log.d(TAG, "Timer finished");
+                bi.putExtra("stop", "stop");
+                bi.setAction("com.spleint.kida.stop");
+                sendBroadcast(bi);
+            }
+        };
+
+        cdt.start();
+    }
+
+    public void cancelTimer() {
+        if (cdt != null){
+            cdt.cancel();
+        }
+    }
 }

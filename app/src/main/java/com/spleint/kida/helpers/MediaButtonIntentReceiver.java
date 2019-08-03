@@ -205,7 +205,11 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
                             mLastClickTime = eventtime;
                             acquireWakeLockAndSendMessage(context, msg, delay);
                         } else {
-                            startService(context, command);
+                            try {
+                                startService(context, command);
+                            }catch (IllegalStateException ignored){
+
+                            }
                         }
                         mLaunched = false;
                         mDown = true;

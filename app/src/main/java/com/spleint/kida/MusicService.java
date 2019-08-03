@@ -432,6 +432,23 @@ public class MusicService extends Service {
                           | MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS);
     }
 
+    public void onResume(){
+        if (mPlayer == null){
+            mPlayer = new MultiPlayer(this);
+            if (mPlayerHandler != null){
+                mPlayer.setHandler(mPlayerHandler);
+            }else {
+                if (mHandlerThread == null){
+                    mHandlerThread = new HandlerThread("MusicPlayerHandler",
+                            android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                }
+                mHandlerThread.start();
+                mPlayerHandler = new MusicPlayerHandler(this, mHandlerThread.getLooper());
+                mPlayer.setHandler(mPlayerHandler);
+            }
+        }
+    }
+
     @Override
     public void onDestroy() {
         if (D) Log.d(TAG, "Destroying service");
@@ -559,6 +576,7 @@ public class MusicService extends Service {
         } else if (CMDPLAY.equals(command)) {
             play();
         } else if (CMDSTOP.equals(command) || STOP_ACTION.equals(action)) {
+            Log.d(TAG, "handleCommandIntent: stop cmd received");
             pause();
             mPausedByTransientLossOfFocus = false;
             seek(0);
@@ -2479,7 +2497,11 @@ public class MusicService extends Service {
             try {
                 if (setDataSourceImpl(mNextMediaPlayer, path)) {
                     mNextMediaPath = path;
-                    mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer);
+                    try {
+                        mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer);
+                    }catch (IllegalArgumentException ignored){
+
+                    }
                 } else {
                     if (mNextMediaPlayer != null) {
                         mNextMediaPlayer.release();

@@ -23,11 +23,27 @@
         <item>@string/artists</item>
     </string-array>
 
+    <string-array name="pref_sleep_timer_entries">
+        <item>@string/never</item>
+        <item>@string/_10_mins</item>
+        <item>@string/_25_mins</item>
+        <item>@string/_45_mins</item>
+        <item>@string/_60_mins</item>
+    </string-array>
+
     <string-array name="pref_startpage_values">
         <item>last_opened</item>
         <item>songs</item>
         <item>albums</item>
         <item>artists</item>
+    </string-array>
+
+    <string-array name="pref_sleep_timer_values">
+        <item>never</item>
+        <item>_10_mins</item>
+        <item>_25_mins</item>
+        <item>_45_mins</item>
+        <item>_60_mins</item>
     </string-array>
 
     <array name="cast_expanded_controller_control_buttons">

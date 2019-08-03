@@ -54,6 +54,18 @@
 
     </com.spleint.kida.widgets.ThemedPreferenceCategory>
 
+    <com.spleint.kida.widgets.ThemedPreferenceCategory android:title="@string/sleep_timer">
+        <com.afollestad.appthemeengine.prefs.ATEListPreference
+            android:defaultValue="never"
+            android:entries="@array/pref_sleep_timer_entries"
+            android:entryValues="@array/pref_sleep_timer_values"
+            android:key="sleep_timer_time"
+            android:summary="@string/sleep_timer_summary"
+            android:title="@string/sleep_timer"
+            app:ateKey_pref_checkBox="?ate_key" />
+
+    </com.spleint.kida.widgets.ThemedPreferenceCategory>
+
     <com.spleint.kida.widgets.ThemedPreferenceCategory android:title="@string/other">
 
         <com.afollestad.appthemeengine.prefs.ATEListPreference

@@ -49,9 +49,7 @@
     <string name="black">Black</string>
 
     <string name="last_opened">Last Opened</string>
-    <string name="play_billing_license_key">1234</string>
-    <string name="cast_app_id">12345</string>
-    <string name="fabric_api_key">fbdf3e3928e76623581e48417126a4c6f7a6b187</string>
+    <!--<string name="fabric_api_key">fbdf3e3928e76623581e48417126a4c6f7a6b187</string>-->
 
     <string name="songs">Songs</string>
     <string name="albums">Albums</string>
@@ -169,5 +167,13 @@
     <string name="cast">Cast</string>
     <string name="now_playing_no_track_selected">\"No current track selected.</string>
     <string name="lyrics_loading">Loading...</string>
+    <string name="sleep_timer">Sleep Timer</string>
+    <string name="sleep_timer_summary">Shut off the music after a preset amount of time</string>
+
+    <string name="never">Never</string>
+    <string name="_10_mins">10 Minutes</string>
+    <string name="_25_mins">25 Minutes</string>
+    <string name="_45_mins">45 Minutes</string>
+    <string name="_60_mins">60 Minutes</string>
 
 </resources>

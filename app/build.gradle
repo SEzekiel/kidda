@@ -8,8 +8,8 @@ android {
         applicationId "spleint.kida"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 20
-        versionName "1.6"
+        versionCode 25
+        versionName "2.0"
         //renderscript support mode is not supported for 21+ with gradle version 2.0
         renderscriptTargetApi 20
         renderscriptSupportModeEnabled true
@@ -21,7 +21,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [ appNameSuffix:""]
-
         }
         debug {
             ext.enableCrashlytics = false
@@ -30,7 +29,7 @@ android {
             applicationIdSuffix '.dev'
             manifestPlaceholders = [ appNameSuffix:" Dev"]
 
-            resValue "string", "fabric_api_key", "12345"
+            resValue "string", "fabric_api_key", "fbdf3e3928e76623581e48417126a4c6f7a6b187"
             resValue "string", "play_billing_license_key", "12345"
             resValue "string", "cast_app_id", "12345"
 
@@ -82,6 +81,4 @@ dependencies {
     }
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
-
-
 }
