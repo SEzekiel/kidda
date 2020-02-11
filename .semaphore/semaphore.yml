@@ -10,4 +10,6 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - build
+            - >-
+              chmod +x gradlew - ./gradlew assembleDebug - ./gradlew test -
+              ./gradlew build
