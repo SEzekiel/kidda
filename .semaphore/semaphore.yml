@@ -15,6 +15,6 @@ blocks:
           commands:
             - checkout
             - cache restore
-            - bundle config set path 'vendor/bundle
+            - bundle config set path 'vendor/bundle'
             - bundle install
             - cache store
