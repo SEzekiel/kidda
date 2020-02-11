@@ -1,13 +1,19 @@
 version: v1.0
-name: Initial Pipeline
+name: Android example
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: 'semaphoreci/android:29'
 blocks:
-  - name: 'Block #1'
+  - name: Build
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Hello Android
           commands:
-            - ./gradlew test
+            - checkout
+            - cache restore
+            - bundle install --path vendor/bundle
+            - cache store
